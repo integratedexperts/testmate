@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\Tests\testmode\Unit;
 
@@ -41,7 +41,7 @@ class TestmodeTest extends UnitTestCase {
    * @return array<array<mixed>>
    *   Data provider for test.
    */
-  public function providerMatchLike(): array {
+  public static function providerMatchLike(): array {
     return [
       ['', '', TRUE],
       ['t', 't', TRUE],
@@ -116,7 +116,7 @@ class TestmodeTest extends UnitTestCase {
    * @return array<array<mixed>>
    *   Provider data for test.
    */
-  public function providerMultilineToArray(): array {
+  public static function providerMultilineToArray(): array {
     return [
       ['', []],
       [' ', []],
@@ -168,7 +168,7 @@ class TestmodeTest extends UnitTestCase {
    * @return array<array<mixed>>
    *   Provider test data.
    */
-  public function providerArrayToTextarea(): array {
+  public static function providerArrayToTextarea(): array {
     return [
       [[], ''],
       [[''], ''],
