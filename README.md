@@ -14,7 +14,9 @@
 ![LICENSE](https://img.shields.io/github/license/AlexSkrypnyk/testmode)
 ![Renovate](https://img.shields.io/badge/renovate-enabled-green?logo=renovatebot)
 
-![Drupal 9](https://img.shields.io/badge/Drupal-9-blue.svg) ![Drupal 10](https://img.shields.io/badge/Drupal-10-blue.svg)
+![Drupal 9](https://img.shields.io/badge/Drupal-9-blue.svg)
+![Drupal 10](https://img.shields.io/badge/Drupal-10-009CDE.svg)
+![Drupal 11](https://img.shields.io/badge/Drupal-11-006AA9.svg)
 
 </div>
 
@@ -92,7 +94,7 @@ vendor/bin/twig-cs-fixer
 
 ### Tests
 
-Run `.devtools/test.sh` (or `ahoy test`
+Run `cd build && vendor/bin/phpunit` (or `ahoy test`
 if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to run all test for
 your extension.
 
