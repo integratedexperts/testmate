@@ -30,7 +30,7 @@ class SettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ConfigFactoryInterface $config_factory, protected TypedConfigManagerInterface $typedConfigManager) {
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typedConfigManager) {
     parent::__construct($config_factory, $typedConfigManager);
     $this->testmode = Testmode::getInstance();
   }
