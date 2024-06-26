@@ -145,14 +145,14 @@ jobs:
   deploy:
     <<: *container_config
     environment:
-      DEPLOY_SSH_KEY_FINGERPRINT: *deploy_ssh_key_fingerprint
+      DEPLOY_SSH_KEY_FINGERPRINT: *deploy_ssh_fingerprint
       DEFAULT_BRANCH: *default_branch
     steps:
       - checkout
 
       - add_ssh_keys:
           fingerprints:
-            - *deploy_ssh_key_fingerprint
+            - *deploy_ssh_fingerprint
 
       - run:
           name: Deploy
