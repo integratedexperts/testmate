@@ -14,7 +14,9 @@
 ![LICENSE](https://img.shields.io/github/license/AlexSkrypnyk/testmode)
 ![Renovate](https://img.shields.io/badge/renovate-enabled-green?logo=renovatebot)
 
-![Drupal 9](https://img.shields.io/badge/Drupal-9-blue.svg) ![Drupal 10](https://img.shields.io/badge/Drupal-10-blue.svg)
+![Drupal 9](https://img.shields.io/badge/Drupal-9-blue.svg)
+![Drupal 10](https://img.shields.io/badge/Drupal-10-009CDE.svg)
+![Drupal 11](https://img.shields.io/badge/Drupal-11-006AA9.svg)
 
 </div>
 
@@ -32,12 +34,13 @@ coverage).
     composer require drupal/testmode
 
 ## Use case
-Running a Behat test on the site with existing content may result in
-FALSE positives because of the live content being mixed with test content.
 
-Example: list of 3 featured articles. When the test creates 3 articles and make
+Running a Behat test on the site with existing content may result in
+false-positives because of the live content being mixed with the test content.
+
+Example: list of 3 featured articles. When the test creates 3 articles and makes
 them featured, there may be existing featured articles that will confuse tests
-resulting in false positive failure.
+resulting in a false-positive failure.
 
 ## How it works
 1. When writing Behat tests, all test content items (nodes,
@@ -62,7 +65,7 @@ the provided scripts.
 
 ### Build
 
-Run `.devtools/build-codebase.sh` (or `ahoy build-codebase`
+Run `.devtools/buid.sh` (or `ahoy build`
 if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to start inbuilt PHP
 server locally and run the same commands as in CI, plus installing a site and
 your extension automatically.
@@ -81,18 +84,21 @@ vendor/bin/phpcs
 vendor/bin/phpstan
 vendor/bin/rector --clear-cache --dry-run
 vendor/bin/phpmd . text phpmd.xml
-vendor/bin/twigcs
+vendor/bin/twig-cs-fixer
 ```
 
 - PHPCS config: [`phpcs.xml`](phpcs.xml)
 - PHPStan config: [`phpstan.neon`](phpstan.neon)
 - PHPMD config: [`phpmd.xml`](phpmd.xml)
 - Rector config: [`rector.php`](rector.php)
-- TwigCS config: [`.twig_cs.php`](.twig_cs.php)
+- Twig CS Fixer config: [`.twig-cs-fixer.php`](.twig-cs-fixer.php)
+- Patches can be applied to the dependencies: add a patch to the
+    `patches` section of `composer.json`. Local patches will be sourced from
+    the `patches` directory.
 
 ### Tests
 
-Run `.devtools/test.sh` (or `ahoy test`
+Run tests individually with `cd build && ./vendor/bin/phpunit` (or `ahoy test`
 if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to run all test for
 your extension.
 

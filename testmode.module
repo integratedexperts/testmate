@@ -9,7 +9,7 @@
  * This module should never be enabled in production.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\Core\Link;
