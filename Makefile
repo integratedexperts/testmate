@@ -63,11 +63,12 @@ lint-fix:
 	pushd "build" >/dev/null || exit 1 && \
 	vendor/bin/rector --clear-cache && \
 	vendor/bin/phpcbf && \
+	vendor/bin/twig-cs-fixer --no-cache --fix && \
 	popd >/dev/null || exit 1
 
 test:
 	pushd "build" >/dev/null || exit 1 && \
-	vendor/bin/phpunit && \
+	BROWSERTEST_OUTPUT_DIRECTORY=/tmp vendor/bin/phpunit && \
 	popd >/dev/null || exit 1
 
 test-unit:
@@ -82,7 +83,7 @@ test-kernel:
 
 test-functional:
 	pushd "build" >/dev/null || exit 1 && \
-	vendor/bin/phpunit --testsuite functional && \
+	BROWSERTEST_OUTPUT_DIRECTORY=/tmp vendor/bin/phpunit --testsuite functional && \
 	popd >/dev/null || exit 1
 
 reset:

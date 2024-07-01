@@ -91,10 +91,13 @@ vendor/bin/twig-cs-fixer
 - PHPMD config: [`phpmd.xml`](phpmd.xml)
 - Rector config: [`rector.php`](rector.php)
 - Twig CS Fixer config: [`.twig-cs-fixer.php`](.twig-cs-fixer.php)
+- Patches can be applied to the dependencies: add a patch to the
+    `patches` section of `composer.json`. Local patches will be sourced from
+    the `patches` directory.
 
 ### Tests
 
-Run `cd build && vendor/bin/phpunit` (or `ahoy test`
+Run tests individually with `cd build && ./vendor/bin/phpunit` (or `ahoy test`
 if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to run all test for
 your extension.
 
