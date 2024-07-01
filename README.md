@@ -34,12 +34,13 @@ coverage).
     composer require drupal/testmode
 
 ## Use case
-Running a Behat test on the site with existing content may result in
-FALSE positives because of the live content being mixed with test content.
 
-Example: list of 3 featured articles. When the test creates 3 articles and make
+Running a Behat test on the site with existing content may result in
+false-positives because of the live content being mixed with the test content.
+
+Example: list of 3 featured articles. When the test creates 3 articles and makes
 them featured, there may be existing featured articles that will confuse tests
-resulting in false positive failure.
+resulting in a false-positive failure.
 
 ## How it works
 1. When writing Behat tests, all test content items (nodes,
@@ -64,7 +65,7 @@ the provided scripts.
 
 ### Build
 
-Run `.devtools/assemble.sh` (or `ahoy assemble`
+Run `.devtools/buid.sh` (or `ahoy build`
 if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to start inbuilt PHP
 server locally and run the same commands as in CI, plus installing a site and
 your extension automatically.
