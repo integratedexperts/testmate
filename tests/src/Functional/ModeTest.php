@@ -9,7 +9,7 @@ namespace Drupal\Tests\testmode\Functional;
  *
  * @group Testmode
  */
-class ModeTest extends TestmodeTestBase {
+class ModeTest extends TestmodeFunctionalTestBase {
 
   /**
    * Test that enabling and disabling of test mode works.

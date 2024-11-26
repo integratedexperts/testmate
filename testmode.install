@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install and uninstall functionality for Testmode module.
+ * Install and uninstall functions for Testmode module.
  */
 
 declare(strict_types=1);

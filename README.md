@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
-  <img width=200px height=200px src="https://placehold.jp/000000/ffffff/200x200.png?text=Testmode&css=%7B%22border-radius%22%3A%22%20100px%22%7D" alt="Test mode"></a>
+  <img width=200px height=200px src="https://placehold.jp/000000/ffffff/200x200.png?text=testmode&css=%7B%22border-radius%22%3A%22%20100px%22%7D" alt="Testmode logo"></a>
 </p>
 
 <h1 align="center">Testmode</h1>
@@ -14,7 +14,6 @@
 ![LICENSE](https://img.shields.io/github/license/AlexSkrypnyk/testmode)
 ![Renovate](https://img.shields.io/badge/renovate-enabled-green?logo=renovatebot)
 
-![Drupal 9](https://img.shields.io/badge/Drupal-9-blue.svg)
 ![Drupal 10](https://img.shields.io/badge/Drupal-10-009CDE.svg)
 ![Drupal 11](https://img.shields.io/badge/Drupal-11-006AA9.svg)
 
@@ -25,7 +24,6 @@
 <p align="center">This Drupal module is designed to modify existing site content and configurations while running tests.</p>
 
 ## Features
-This is a module to support testing, so it is not expected to be used in
 production (although, it adheres to Drupal coding standards and has good test
 coverage).
 
@@ -65,10 +63,10 @@ the provided scripts.
 
 ### Build
 
-Run `.devtools/buid.sh` (or `ahoy build`
+Run `.devtools/assemble.sh` (or `ahoy assemble`
 if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to start inbuilt PHP
 server locally and run the same commands as in CI, plus installing a site and
-your extension automatically.
+Testmode automatically.
 
 ### Code linting
 
@@ -92,18 +90,15 @@ vendor/bin/twig-cs-fixer
 - PHPMD config: [`phpmd.xml`](phpmd.xml)
 - Rector config: [`rector.php`](rector.php)
 - Twig CS Fixer config: [`.twig-cs-fixer.php`](.twig-cs-fixer.php)
-- Patches can be applied to the dependencies: add a patch to the
-    `patches` section of `composer.json`. Local patches will be sourced from
-    the `patches` directory.
 
 ### Tests
 
 Run tests individually with `cd build && ./vendor/bin/phpunit` (or `ahoy test`
 if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to run all test for
-your extension.
+Testmode.
 
 ### Browsing SQLite database
 
 To browse the contents of created SQLite database
-(located at `/tmp/site_[EXTENSION_NAME].sqlite`),
+(located at `/tmp/site_testmode.sqlite`),
 use [DB Browser for SQLite](https://sqlitebrowser.org/).

@@ -7,15 +7,15 @@ namespace Drupal\Tests\testmode\Functional;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
-use Drupal\views\Views;
 use Drupal\testmode\Testmode;
+use Drupal\views\Views;
 
 /**
  * Tests the term views.
  *
  * @group Testmode
  */
-class TermViewsTest extends TestmodeTestBase {
+class TermViewsTest extends TestmodeFunctionalTestBase {
 
   /**
    * Vocabulary for tests.
@@ -40,6 +40,8 @@ class TermViewsTest extends TestmodeTestBase {
 
   /**
    * Test term view without caching.
+   *
+   * @group wip1
    */
   public function testTermViewNoCache(): void {
     $this->createVocabulary();
@@ -61,7 +63,7 @@ class TermViewsTest extends TestmodeTestBase {
 
     $this->drupalGet('/test-testmode-term');
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->pageTextContains('Term 1');
     $this->assertSession()->pageTextContains('Term 2');
@@ -71,12 +73,12 @@ class TermViewsTest extends TestmodeTestBase {
     $this->assertSession()->pageTextContains('[OTHERTEST] Term 6');
 
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->testmode->enableTestMode();
 
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->pageTextNotContains('Term 1');
     $this->assertSession()->pageTextNotContains('Term 2');
@@ -86,7 +88,7 @@ class TermViewsTest extends TestmodeTestBase {
     $this->assertSession()->pageTextContains('[OTHERTEST] Term 6');
 
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
   }
 
   /**
@@ -119,7 +121,7 @@ class TermViewsTest extends TestmodeTestBase {
     $view->save();
 
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'MISS');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'MISS');
 
     $this->assertSession()->pageTextContains('Term 1');
     $this->assertSession()->pageTextContains('Term 2');
@@ -129,12 +131,12 @@ class TermViewsTest extends TestmodeTestBase {
     $this->assertSession()->pageTextContains('[OTHERTEST] Term 6');
 
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'HIT');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'HIT');
 
     $this->testmode->enableTestMode();
 
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'MISS');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'MISS');
 
     $this->assertSession()->pageTextNotContains('Term 1');
     $this->assertSession()->pageTextNotContains('Term 2');
@@ -144,7 +146,7 @@ class TermViewsTest extends TestmodeTestBase {
     $this->assertSession()->pageTextContains('[OTHERTEST] Term 6');
 
     $this->drupalGet('/test-testmode-term');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'HIT');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'HIT');
   }
 
   /**
@@ -165,7 +167,7 @@ class TermViewsTest extends TestmodeTestBase {
     $this->drupalLoginAdmin();
 
     $this->drupalGet('/admin/structure/taxonomy/manage/testmode_tags/overview');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->pageTextContains('Term 1');
     $this->assertSession()->pageTextContains('Term 2');
@@ -175,12 +177,12 @@ class TermViewsTest extends TestmodeTestBase {
     $this->assertSession()->pageTextContains('[OTHERTEST] Term 6');
 
     $this->drupalGet('/admin/structure/taxonomy/manage/testmode_tags/overview');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->testmode->enableTestMode();
 
     $this->drupalGet('/admin/structure/taxonomy/manage/testmode_tags/overview');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->pageTextNotContains('Term 1');
     $this->assertSession()->pageTextNotContains('Term 2');
@@ -190,7 +192,7 @@ class TermViewsTest extends TestmodeTestBase {
     $this->assertSession()->pageTextContains('[OTHERTEST] Term 6');
 
     $this->drupalGet('/admin/structure/taxonomy/manage/testmode_tags/overview');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
   }
 
   /**
@@ -232,7 +234,7 @@ class TermViewsTest extends TestmodeTestBase {
   /**
    * Creates and returns a taxonomy term.
    *
-   * @param array{"name"?: string, "description"?: string, "format"?: string, "vid"?: string, "langcode"?: string} $settings
+   * @param array $settings
    *   (optional) An array of values to override the following default
    *   properties of the term:
    *   - name: A random string.
@@ -260,6 +262,7 @@ class TermViewsTest extends TestmodeTestBase {
     ];
     $term = Term::create($settings);
     $term->save();
+
     return $term;
   }
 

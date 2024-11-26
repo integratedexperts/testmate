@@ -43,10 +43,7 @@ class SettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Get editable config name.
-   *
-   * @return string[]
-   *   Editable config names.
+   * {@inheritdoc}
    */
   protected function getEditableConfigNames(): array {
     // Config is managed by the Testmode class.
@@ -54,15 +51,7 @@ class SettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Build a form structure.
-   *
-   * @param array<mixed> $form
-   *   Form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Form state.
-   *
-   * @return array<mixed>
-   *   Form structure.
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['description'] = [
@@ -163,12 +152,7 @@ class SettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Submit form.
-   *
-   * @param array<mixed> $form
-   *   Form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Form state.
+   * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     parent::submitForm($form, $form_state);
