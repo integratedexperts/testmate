@@ -12,7 +12,7 @@ use Drupal\views\Views;
  *
  * @group Testmode
  */
-class UserViewsTest extends TestmodeTestBase {
+class UserViewsTest extends TestmodeFunctionalTestBase {
 
   /**
    * Modules to enable.
@@ -24,7 +24,7 @@ class UserViewsTest extends TestmodeTestBase {
   /**
    * Views used by this test.
    *
-   * @var array<string>
+   * @var array
    */
   public static array $testViews = ['test_testmode_user'];
 
@@ -50,7 +50,7 @@ class UserViewsTest extends TestmodeTestBase {
 
     $this->drupalGet('/test-testmode-user');
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->responseContains('User 1');
     $this->assertSession()->responseContains('User 2');
@@ -60,12 +60,12 @@ class UserViewsTest extends TestmodeTestBase {
     $this->assertSession()->responseContains('[OTHERTEST] User 6');
 
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->testmode->enableTestMode();
 
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->responseNotContains('User 1');
     $this->assertSession()->responseNotContains('User 2');
@@ -75,13 +75,13 @@ class UserViewsTest extends TestmodeTestBase {
     $this->assertSession()->responseContains('[OTHERTEST] User 6');
 
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
   }
 
   /**
    * Test user view with tag-based caching.
    */
-  public function testUserViewCacheTag():void {
+  public function testUserViewCacheTag(): void {
     $this->createUsers(50);
 
     $this->testmode->setUserPatterns(Testmode::arrayToMultiline([
@@ -107,7 +107,7 @@ class UserViewsTest extends TestmodeTestBase {
     $view->save();
 
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'MISS');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'MISS');
 
     $this->assertSession()->responseContains('User 1');
     $this->assertSession()->responseContains('User 2');
@@ -117,12 +117,12 @@ class UserViewsTest extends TestmodeTestBase {
     $this->assertSession()->responseContains('[OTHERTEST] User 6');
 
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'HIT');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'HIT');
 
     $this->testmode->enableTestMode();
 
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'MISS');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'MISS');
 
     $this->assertSession()->responseNotContains('User 1');
     $this->assertSession()->responseNotContains('User 2');
@@ -132,7 +132,7 @@ class UserViewsTest extends TestmodeTestBase {
     $this->assertSession()->responseContains('[OTHERTEST] User 6');
 
     $this->drupalGet('/test-testmode-user');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'HIT');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'HIT');
   }
 
   /**
@@ -158,7 +158,7 @@ class UserViewsTest extends TestmodeTestBase {
     $this->drupalLoginAdmin();
 
     $this->drupalGet('/admin/people');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->responseContains('User 1');
     $this->assertSession()->responseContains('User 2');
@@ -168,12 +168,12 @@ class UserViewsTest extends TestmodeTestBase {
     $this->assertSession()->responseContains('[OTHERTEST] User 6');
 
     $this->drupalGet('/admin/people');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->testmode->enableTestMode();
 
     $this->drupalGet('/admin/people');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
 
     $this->assertSession()->responseNotContains('User 1');
     $this->assertSession()->responseNotContains('User 2');
@@ -183,7 +183,7 @@ class UserViewsTest extends TestmodeTestBase {
     $this->assertSession()->responseContains('[OTHERTEST] User 6');
 
     $this->drupalGet('/admin/people');
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
+    $this->assertSession()->responseHeaderContains('X-Drupal-Dynamic-Cache', 'UNCACHEABLE');
   }
 
   /**

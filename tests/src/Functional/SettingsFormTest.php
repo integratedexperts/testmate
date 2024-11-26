@@ -11,7 +11,7 @@ use Drupal\testmode\Testmode;
  *
  * @group Testmode
  */
-class SettingsFormTest extends TestmodeTestBase {
+class SettingsFormTest extends TestmodeFunctionalTestBase {
 
   /**
    * Modules to enable.

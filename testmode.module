@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Test module used for providing hook implementation used in tests.
+ * A module used for providing hook implementation used in tests.
  *
  * Test hooks alter content only if the test mode is enabled ('test_mode'
  * variable is set).

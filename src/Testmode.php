@@ -351,7 +351,7 @@ class Testmode {
   /**
    * Helper to convert multi-line strings into an array.
    *
-   * @param string|array<string> $string
+   * @param string|array $string
    *   String value to convert.
    *
    * @return string[]

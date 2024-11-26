@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\testmode\Functional;
 
+use Drupal\Tests\search_api\Functional\ExampleContentTrait;
 use Drupal\search_api\Entity\Index;
 use Drupal\testmode\Testmode;
-use Drupal\Tests\search_api\Functional\ExampleContentTrait;
 
 /**
  * Tests the Search API views.
  *
  * @group Testmode
- * @group wip
  */
-class SearchApiViewsTest extends TestmodeTestBase {
+class SearchApiViewsTest extends TestmodeFunctionalTestBase {
 
   use ExampleContentTrait;
 

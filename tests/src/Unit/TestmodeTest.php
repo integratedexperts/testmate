@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\testmode\Unit;
 
-use Drupal\testmode\Testmode;
 use Drupal\Tests\UnitTestCase;
+use Drupal\testmode\Testmode;
 
 /**
  * Class TestmodeTest.

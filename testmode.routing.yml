@@ -2,6 +2,8 @@ testmode.admin_settings:
   path: '/admin/config/development/testmode'
   defaults:
     _form: '\Drupal\testmode\Form\SettingsForm'
-    _title: 'Testmode'
+    _title: 'Testmode Settings'
   requirements:
     _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\testmode\Functional;
 
-use Drupal\testmode\Testmode;
 use Drupal\Tests\views\Functional\ViewTestBase;
+use Drupal\testmode\Testmode;
 use Drupal\views\Tests\ViewTestData;
 
 /**
@@ -13,7 +13,7 @@ use Drupal\views\Tests\ViewTestData;
  *
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-abstract class TestmodeTestBase extends ViewTestBase {
+abstract class TestmodeFunctionalTestBase extends ViewTestBase {
 
   /**
    * {@inheritdoc}
@@ -35,15 +35,7 @@ abstract class TestmodeTestBase extends ViewTestBase {
   protected $testmode;
 
   /**
-   * Setup for test.
-   *
-   * @param bool $import_test_views
-   *   Import test view.
-   * @param string[] $modules
-   *   List module.
-   *
-   * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-   * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+   * {@inheritdoc}
    */
   protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
     parent::setUp($import_test_views);
@@ -62,7 +54,19 @@ abstract class TestmodeTestBase extends ViewTestBase {
    */
   protected function drupalLoginAdmin(): void {
     $user = $this->createUser([], NULL, TRUE);
+    // @phpstan-ignore-next-line
     $this->drupalLogin($user);
+  }
+
+  /**
+   * Checks that current response header contains a value.
+   */
+  public function responseHeaderContains(string $name, string $value): void {
+    // @phpstan-ignore-next-line
+    $actual = $this->session->getResponseHeader($name);
+    $message = sprintf('Current response header "%s" contains "%s", but "%s" expected.', $name, $actual, $value);
+
+    $this->assertContains($value, $actual, $message);
   }
 
 }

@@ -9,7 +9,7 @@ namespace Drupal\Tests\testmode\Functional;
  *
  * @group Testmode
  */
-class DefaultConfigTest extends TestmodeTestBase {
+class DefaultConfigTest extends TestmodeFunctionalTestBase {
 
   /**
    * Test that default configuration is correctly installed.
