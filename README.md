@@ -1,15 +1,15 @@
 <p align="center">
   <a href="" rel="noopener">
-  <img width=200px height=200px src="https://placehold.jp/000000/ffffff/200x200.png?text=testmode&css=%7B%22border-radius%22%3A%22%20100px%22%7D" alt="Testmode logo"></a>
+  <img width=200px height=200px src="https://placehold.jp/000000/ffffff/200x200.png?text=Testmode&css=%7B%22border-radius%22%3A%22%20100px%22%7D" alt="Testmode logo"></a>
 </p>
 
-<h1 align="center">Testmode</h1>
+<h1 align="center">Drupal module to modify existing site content and configurations while running tests.</h1>
 
 <div align="center">
 
 [![GitHub Issues](https://img.shields.io/github/issues/AlexSkrypnyk/testmode.svg)](https://github.com/AlexSkrypnyk/testmode/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/AlexSkrypnyk/testmode.svg)](https://github.com/AlexSkrypnyk/testmode/pulls)
-[![CircleCI](https://circleci.com/gh/AlexSkrypnyk/testmode.svg?style=shield)](https://circleci.com/gh/AlexSkrypnyk/testmode)
+[![Test](https://github.com/AlexSkrypnyk/testmode/actions/workflows/test.yml/badge.svg)](https://github.com/AlexSkrypnyk/testmode/actions/workflows/test.yml)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/AlexSkrypnyk/testmode)
 ![LICENSE](https://img.shields.io/github/license/AlexSkrypnyk/testmode)
 ![Renovate](https://img.shields.io/badge/renovate-enabled-green?logo=renovatebot)
@@ -21,15 +21,13 @@
 
 ---
 
-<p align="center">This Drupal module is designed to modify existing site content and configurations while running tests.</p>
-
-## Features
-production (although, it adheres to Drupal coding standards and has good test
-coverage).
+This is a module to support testing, so it is not expected to be used in production (although, it adheres to Drupal coding standards and has good test coverage).
 
 ## Installation
 
-    composer require drupal/testmode
+```shell
+composer require --dev drupal/testmode
+```
 
 ## Use case
 
@@ -63,15 +61,21 @@ the provided scripts.
 
 ### Build
 
-Run `.devtools/assemble.sh` (or `ahoy assemble`
-if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to start inbuilt PHP
-server locally and run the same commands as in CI, plus installing a site and
-Testmode automatically.
+Run the following commands to start inbuilt PHP
+server locally and run the same commands as in CI, 
+plus installing a site and Testmode automatically.
+```shell
+./.devtools/assemble.sh
+./.devtools/start.sh
+./.devtools/provision.sh
+```
+or `ahoy build` or `make build`.
+
 
 ### Code linting
 
 Run tools individually (or `ahoy lint` to run all tools
-if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to lint your code
+if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed or `make lint`) to lint your code
 according to
 the [Drupal coding standards](https://www.drupal.org/docs/develop/standards).
 
@@ -93,8 +97,7 @@ vendor/bin/twig-cs-fixer
 
 ### Tests
 
-Run tests individually with `cd build && ./vendor/bin/phpunit` (or `ahoy test`
-if [Ahoy](https://github.com/ahoy-cli/ahoy) is installed) to run all test for
+Run tests individually with `cd build && ./vendor/bin/phpunit` (`ahoy test` or `make test`) to run all test for
 Testmode.
 
 ### Browsing SQLite database
@@ -102,3 +105,7 @@ Testmode.
 To browse the contents of created SQLite database
 (located at `/tmp/site_testmode.sqlite`),
 use [DB Browser for SQLite](https://sqlitebrowser.org/).
+
+---
+_This repository was created using the [Drupal Extension Scaffold](https://github.com/AlexSkrypnyk/drupal_extension_scaffold) project template_
+
